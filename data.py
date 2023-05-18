@@ -25,7 +25,6 @@ def calculate_indicators(dflist, trixLength, trixSignal):
 
 def load_historical_data(bitget, pairlist, timeframe, nbOfCandles, message_list=None):
     dflist = {}
-    ratio = [int((nbOfCandles * (100 / (i + 1))) / 100) for i in range(0, 3)]
     for pair in pairlist:
         try:
             df = bitget.get_more_last_historical_async(pair, timeframe, 1000)
