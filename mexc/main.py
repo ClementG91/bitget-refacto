@@ -1,6 +1,6 @@
 from datetime import datetime
 from config import load_secret
-from bitget import configure_bitget
+from mexc import configure_mexc
 from data import calculate_indicators, load_historical_data
 from trading import (
     calculate_balances,
@@ -31,9 +31,9 @@ def get_time_now():
 
 def main():
     print(get_time_now())
-    # Initialize bitget API client
+    # Initialize mexc API client
     secret = load_secret("secret.json")
-    bitget = configure_bitget("bitget_exemple", secret, production=True)
+    mexc = configure_mexc("mexc_exemple", secret, production=True)
 
     # Initialize Discord client
     intents = discord.Intents.default()
@@ -43,22 +43,21 @@ def main():
 
     # Define your list of coins
     pairlist = [
-        "BTC/USDT:USDT",
-        "ETH/USDT:USDT",
-        "BNB/USDT:USDT",
-        "XRP/USDT:USDT",
-        "SOL/USDT:USDT",
-        "SHIB/USDT:USDT",
-        "CHZ/USDT:USDT",
-        "DOGE/USDT:USDT",
-        "MATIC/USDT:USDT",
-        "AVAX/USDT:USDT",
+        "BTC/USDC",
+        "ETH/USDC",
+        "BNB/USDC",
+        "XRP/USDC",
+        "SOL/USDC",
+        "SHIB/USDC",
+        "DOGE/USDC",
+        "MATIC/USDC",
+        "AVAX/USDC"
     ]
 
     # Load historical data
     message_list = []
     dflist = load_historical_data(
-        bitget, pairlist, timeframe, 1000, message_list
+        mexc, pairlist, timeframe, 1000, message_list
     )
 
     # Calculate indicators
@@ -66,7 +65,7 @@ def main():
 
     # Calculate balances
     usd_balance, balance_in_usd_per_coin, total_balance_in_usd = calculate_balances(
-        bitget, dflist
+        mexc, dflist
     )
     # Calculate positions
     coin_position_list = calculate_positions(
@@ -76,7 +75,7 @@ def main():
     # Execute sales if sell condition is met
     open_positions = len(coin_position_list)
     message_list, open_positions = execute_sells(
-        bitget,
+        mexc,
         coin_position_list,
         dflist,
         message_list,
@@ -86,7 +85,7 @@ def main():
 
     # Execute buys if buy condition is met
     message_list, open_positions = execute_buys(
-        bitget,
+        mexc,
         dflist,
         message_list,
         open_positions,
