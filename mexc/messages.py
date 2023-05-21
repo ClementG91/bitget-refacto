@@ -2,7 +2,7 @@ subAccountName = 'EBot'
 
 MESSAGE_TEMPLATE = {
     "message_sell": "{}: Sell {} at {}",
-    "message_keep": "{}: Keep {} {} lastPrice = {} coinInUsd = {} ",
+    "message_keep": "{}: Keep {} {} coinInUsd = {} ",
     "message_buy": "{}: Buy {} {} at {} USDC",
     "message_wallet": "{}: Total balance {} USDC",
     "message_erreur": "{}: Unable to retrieve the last {} candles of {}.",

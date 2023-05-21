@@ -65,7 +65,7 @@ def execute_sells(mexc, coin_position_list, dflist, message_list, open_positions
                 subAccountName, str(coin), str(sell_price)))
         else:
             message_list.append(MESSAGE_TEMPLATE['message_keep'].format(subAccountName, str(
-                coin_balance), str(coin), str(sell_price), str(balance_in_usd_per_coin[coin])))
+                coin_balance), str(coin), str(balance_in_usd_per_coin[coin])))
             print('keep', coin)
     return message_list, open_positions
 
